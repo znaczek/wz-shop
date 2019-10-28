@@ -14,16 +14,74 @@ databaseChangeLog:
               primaryKey: true
               nullable: false
         - column:
+            name: category_id
+            type: int
+        - column:
             name: name
             type: varchar(255)
+            constraints:
+              nullable: false
         - column:
             name: description
             type: varchar(512)
         - column:
+            name: price
+            type: int
+            constraints:
+              nullable: false
+        - column:
             name: created_date
-            type: timestamp
+            type: datetime
             constraints:
               nullable: false
         - column:
             name: created_by
             type: varchar(255)
+            constraints:
+              nullable: false
+    - createTable:
+        tableName: category
+        columns:
+        - column:
+            name: id
+            type: int
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: name
+            type: varchar(255)
+            constraints:
+              nullable: false
+        - column:
+            name: slug
+            type: varchar(255)
+            constraints:
+              nullable: false
+        - column:
+            name: parent_id
+            type: int
+        - column:
+            name: created_date
+            type: datetime
+            constraints:
+              nullable: false
+        - column:
+            name: created_by
+            type: varchar(255)
+            constraints:
+              nullable: false
+    - createView:
+        viewName: category_path
+        selectQuery: >
+          WITH RECURSIVE CP(id, parent_id, slug, path) AS (
+          SELECT id, parent_id, slug, slug as path
+          FROM Category
+          WHERE parent_id is null
+          UNION ALL
+          SELECT c.id, c.parent_id, c.slug, concat(cp.path, ',', c.slug)
+          FROM Category as c
+          INNER JOIN CP as cp ON c.parent_id = cp.id
+          )
+          SELECT * FROM CP

@@ -7,16 +7,17 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @MappedSuperclass
 public class WithCreationDetails {
 
-    @Column(name = "created_date", nullable = false, updatable = false)
-    @CreatedDate
-    private LocalDateTime createdDate;
+  @Column(name = "created_date", nullable = false, updatable = false)
+  @CreatedDate
+  private Date createdDate;
 
-    @Column(name = "created_by")
-    @CreatedBy
-    private LocalDateTime createdBy;
+  @Column(name = "created_by", nullable = false, updatable = false)
+  @CreatedBy
+  private String createdBy;
 }

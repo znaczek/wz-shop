@@ -21,7 +21,7 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler {
     return getResponseEntity(e.getStatus(), e.getErrorAttributes(request, printStacktrace));
   }
 
-  private  ResponseEntity<Object> getResponseEntity(HttpStatus status, Map<String, Object> errorAttributes) {
+  private ResponseEntity<Object> getResponseEntity(HttpStatus status, Map<String, Object> errorAttributes) {
     return ResponseEntity
       .status(status)
       .body(errorAttributes);

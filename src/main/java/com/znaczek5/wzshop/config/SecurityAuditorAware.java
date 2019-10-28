@@ -8,9 +8,9 @@ import java.util.Optional;
 @Component("auditorProvider")
 public class SecurityAuditorAware implements AuditorAware<String> {
 
-    @Override
-    public Optional<String> getCurrentAuditor() {
-        return Optional.of("admin");
-    }
+  @Override
+  public Optional<String> getCurrentAuditor() {
+    return Optional.of("admin");
+  }
 
 }

@@ -11,7 +11,9 @@ public class ApiException extends RuntimeException {
   private final ApiErrorCode errorCode;
   private final Map<String, String> errorPayload;
 
-  public ApiException(String message) { this(message, null, null); }
+  public ApiException(String message) {
+    this(message, null, null);
+  }
 
   public ApiException(String message, ApiErrorCode errorCode) {
     this(message, errorCode, null);
